@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Connection</string>
+    <string name="wireless_display_accessibility_service_description">蓝牙连接时自动开启投屏</string>
+</resources>
