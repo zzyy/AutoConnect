@@ -6,18 +6,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.hardware.usb.UsbAccessory;
-import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import com.example.yunzou.connection.util.ContextUtil;
-
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -95,7 +89,7 @@ public class AutoClickUtils {
 
     public static String getSettingPackageName(){
         Intent intent = new Intent(Settings.ACTION_SETTINGS);
-        PackageManager packageManager = ContextUtil.getContext().getPackageManager();
+        PackageManager packageManager = ContextUtil.INSTANCE.getContext().getPackageManager();
         ResolveInfo resolveInfo = packageManager.resolveActivity(intent, 0);
         if (resolveInfo == null){
             return  "";
@@ -109,7 +103,7 @@ public class AutoClickUtils {
     }
 
     public static void startSettingActivity(){
-        Context ctx = ContextUtil.getContext();
+        Context ctx = ContextUtil.INSTANCE.getContext();
         Intent intent = new Intent(Settings.ACTION_SETTINGS);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

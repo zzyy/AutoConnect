@@ -29,7 +29,7 @@ public class ContextUtil {
                         CONTEXT_INSTANCE = (Context) method2.invoke(currentActivityThread);//获取 Context对象
 
                     } catch (Exception e) {
-                        e.printStackTrace();
+                       throw new RuntimeException("反射获取content", e);
                     }
                 }
             }

@@ -5,11 +5,10 @@ import android.accessibilityservice.AccessibilityServiceInfo
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityNodeInfo
+import com.example.yunzou.connection.accessibility.WirelessDisplayAccessibilityService
 
 /**
  * Created by Simon on 2017/10/17.
@@ -20,8 +19,8 @@ class AccessibilityUtils {
         private val TAG: String = "zy.AccessibilityUtils"
 
 
-        fun isServiceEnable(context: Context, serviceName: String): Boolean {
-            val ctx = context.applicationContext
+        fun isEnabled(serviceName: String): Boolean {
+            val ctx = ContextUtil.getContext()
             val accessibilityManager: AccessibilityManager = ctx
                     .getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
 
@@ -31,9 +30,13 @@ class AccessibilityUtils {
             return enableServicesInfoList.any { it.id.contains(serviceName) }
         }
 
-        fun openAccessibilitySetting(context: Context) {
+        fun openAccessibilitySettingActivity(context: Context?) {
+            var context = context
+            if (context == null) {
+                context = ContextUtil.getContext()!!
+            }
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            if (context !is Activity) {
+            if (context is Activity) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
 

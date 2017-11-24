@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.Surface;
 
 import com.example.yunzou.connection.util.BluetoothUtils;
-import com.example.yunzou.connection.util.ContextUtil;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class AppSetting {
     private static SharedPreferences PREFERENCES;
 
     static {
-        PREFERENCES = ContextUtil.getContext().getSharedPreferences(APP_DATA_FILE, Context.MODE_PRIVATE);
+        PREFERENCES = ContextUtil.INSTANCE.getContext().getSharedPreferences(APP_DATA_FILE, Context.MODE_PRIVATE);
     }
 
     public static boolean isSystemSettingsSaved(){

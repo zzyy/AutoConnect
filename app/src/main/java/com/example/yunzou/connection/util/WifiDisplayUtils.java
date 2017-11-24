@@ -15,7 +15,7 @@ public class WifiDisplayUtils {
     private final DisplayManager mDisplayManager;
 
     public WifiDisplayUtils() {
-        this.context = ContextUtil.getContext();
+        this.context = ContextUtil.INSTANCE.getContext();
         mDisplayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
     }
 
@@ -81,7 +81,7 @@ public class WifiDisplayUtils {
     }
 
     public static boolean isConnectedWifiDisplay() {
-        Context context = ContextUtil.getContext();
+        Context context = ContextUtil.INSTANCE.getContext();
         DisplayManager displayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
 
         Object wifiDisplayStatus = on(displayManager).call("getWifiDisplayStatus").get();

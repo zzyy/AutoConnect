@@ -12,7 +12,7 @@ import android.os.BatteryManager;
 public class USBUtils {
 
     public static boolean isCharging() {
-        Context context = ContextUtil.getContext();
+        Context context = ContextUtil.INSTANCE.getContext();
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatusIntent = context.registerReceiver(null, ifilter);
 

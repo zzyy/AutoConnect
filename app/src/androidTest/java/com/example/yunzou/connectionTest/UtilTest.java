@@ -6,11 +6,9 @@ import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import com.example.yunzou.connection.accessibility.AutoClickUtils;
-import com.example.yunzou.connection.util.ContextUtil;
 import com.example.yunzou.connection.util.ProcessController;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

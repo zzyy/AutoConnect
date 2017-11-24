@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         sw_enable_auto_wireless_display.setOnCheckedChangeListener({ buttonView, isChecked ->
             if (isChecked) {
-                if (!AccessibilityUtils.isServiceEnable(this,
-                        WirelessDisplayAccessibilityService::class.java.simpleName)) {
+                if (!AccessibilityUtils.isEnabled(WirelessDisplayAccessibilityService.javaClass.name)) {
                     showOpenAccessibilityDialog()
                 }
 
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
                 .setMessage("open Accessibility Setting")
                 .setPositiveButton("Confirm",
-                        { _, _ -> AccessibilityUtils.openAccessibilitySetting(this) })
+                        { _, _ -> AccessibilityUtils.openAccessibilitySettingActivity(this) })
                 .setNegativeButton("Cancel") { _, _ -> sw_enable_auto_wireless_display.isChecked = false }
                 .show()
     }
@@ -93,14 +92,13 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        if (!AccessibilityUtils.isServiceEnable(this,
-                WirelessDisplayAccessibilityService::class.java.simpleName)) {
+        if (!AccessibilityUtils.isEnabled(WirelessDisplayAccessibilityService::class.java.simpleName)) {
             sw_enable_auto_wireless_display.isChecked = false
         }
 
     }
 
     private fun startAccessibilitySettingActivity() {
-        AccessibilityUtils.openAccessibilitySetting(this)
+        AccessibilityUtils.openAccessibilitySettingActivity(this)
     }
 }

@@ -1,12 +1,16 @@
 package com.example.yunzou.connection.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.display.DisplayManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 
 import com.example.yunzou.connection.AppSetting;
+import com.example.yunzou.connection.accessibility.WirelessDisplayAccessibilityService;
 
 import static org.joor.Reflect.*;
 
@@ -54,6 +58,27 @@ public class ProcessController {
         connectWifiDisplay();
     }
 
+    private void startAccessbilityProcess() {
+        Context context = ContextUtil.getContext();
+        boolean isEnable = AccessibilityUtils.Companion.isEnabled(WirelessDisplayAccessibilityService.class.getName());
+        if (isEnable) {
+            AccessibilityUtils.Companion.openAccessibilitySettingActivity(null);
+        }
+    }
+
+
+    public static void openAccessibilitySettingActivity(Context context) {
+        if (context == null) {
+            context = ContextUtil.getContext();
+        }
+        Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        if (context instanceof Activity) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
+        context.startActivity(intent);
+    }
+
     public static void connectWifiDisplay() {
         Context context = ContextUtil.getContext();
         DisplayManager displayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
@@ -76,7 +101,6 @@ public class ProcessController {
 //
 //        Log.d(TAG, "activeWifiDisplay:  "  + activeWifiDisplay.toString());
     }
-
 
     public void processDisconnect() {
         this.isStartedProcessConnect = false;

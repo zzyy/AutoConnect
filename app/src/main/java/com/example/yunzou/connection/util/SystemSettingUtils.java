@@ -18,7 +18,7 @@ public class SystemSettingUtils {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
             return true;
         }
-        Context context = ContextUtil.getContext();
+        Context context = ContextUtil.INSTANCE.getContext();
         boolean canWrite = Settings.System.canWrite(context);
         return canWrite;
     }
@@ -27,7 +27,7 @@ public class SystemSettingUtils {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
             return;
         }
-        Context context = ContextUtil.getContext();
+        Context context = ContextUtil.INSTANCE.getContext();
         Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
         intent.setData(Uri.parse("package:" + context.getPackageName()));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -35,7 +35,7 @@ public class SystemSettingUtils {
     }
 
     public static boolean isEnableAutoRotation() {
-        Context context = ContextUtil.getContext();
+        Context context = ContextUtil.INSTANCE.getContext();
         int systemRotation = 0;
         try {
             systemRotation = Settings.System.getInt(context.getContentResolver(), Settings.System.ACCELEROMETER_ROTATION);
@@ -47,7 +47,7 @@ public class SystemSettingUtils {
     }
 
     public static int getUserRotation() {
-        Context context = ContextUtil.getContext();
+        Context context = ContextUtil.INSTANCE.getContext();
         try {
             return Settings.System.getInt(context.getContentResolver(), Settings.System.USER_ROTATION);
         } catch (Settings.SettingNotFoundException e) {
@@ -57,7 +57,7 @@ public class SystemSettingUtils {
     }
 
     public static void setEnableRotation(boolean enable) {
-        Context context = ContextUtil.getContext();
+        Context context = ContextUtil.INSTANCE.getContext();
         int systemRotation = enable ? 1 : 0;
         try {
             Settings.System.putInt(context.getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, systemRotation);
@@ -67,7 +67,7 @@ public class SystemSettingUtils {
     }
 
     public static void setUserRotation(int userRotation) {
-        Context context = ContextUtil.getContext();
+        Context context = ContextUtil.INSTANCE.getContext();
         try {
             Settings.System.putInt(context.getContentResolver(), Settings.System.USER_ROTATION, userRotation);
         } catch (Exception e) {
